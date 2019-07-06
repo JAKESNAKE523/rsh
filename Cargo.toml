@@ -5,4 +5,4 @@ authors = ["JAKESNAKE523 <jake_williams@suddenlink.net>"]
 edition = "2018"
 
 [dependencies]
-termion = "1.5.2"
+termion = "1.5.3"

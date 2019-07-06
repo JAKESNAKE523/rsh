@@ -1,9 +1,11 @@
+extern crate termion;
 use std::env;
 use std::path;
 use std::process::Command;
-use termion;
-use termion::input::TermRead;
+use termion::event::Key;
 use termion::raw::IntoRawMode;
+use termion::input::TermRead;
+use std::io::{Write, stdout, stdin};
 
 fn init(){
     println!("{}[2J", 27 as char);
@@ -26,7 +28,36 @@ fn dir_print(isPrompt : bool){
 }
 fn get_input() -> String {
     let mut data_read = String::new();
-    std::io::stdin().read_line(&mut data_read).expect("Couldn't read a valid string!");
+
+    let stdin = stdin();
+    let mut stdout = stdout().into_raw_mode().unwrap();
+
+    stdout.flush().unwrap();
+
+    for c in stdin.keys() {
+        //write!(stdout, "{}{}", termion::cursor::Goto(1,1), termion::clear::CurrentLine).unwrap();
+        match c.unwrap() {
+            Key::Char('q') => {
+                data_read = data_read + "q";
+                print!("q");
+            },
+            Key::Char('\n') => { 
+                break;
+            }
+            Key::Char(c) => {
+                data_read = data_read + &c.to_string();
+                print!("{}", c);
+            },                
+            _ => {
+                //print!("Other");
+            },
+        }
+        stdout.flush().unwrap();
+    }
+    println!("\r");
+
+   //let termios = Termios::from_fd(stdin).unwrap();
+    //std::io::stdin().read_line(&mut data_read).expect("Couldn't read a valid string!");
 
     //TODO add_history
 
