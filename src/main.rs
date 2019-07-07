@@ -43,7 +43,7 @@ fn get_input(history: &mut Vec<String>) -> String {
                 data_read = data_read + "q";
                 print!("q");
             },
-            Key::Char(' ') {
+            Key::Char(' ') => {
 
             },
             Key::Char(l) => {
