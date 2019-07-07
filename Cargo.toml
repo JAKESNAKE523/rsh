@@ -1,6 +1,6 @@
 [package]
 name = "rsh"
-version = "0.1.0"
+version = "0.2.0"
 authors = ["JAKESNAKE523 <jake_williams@suddenlink.net>"]
 edition = "2018"
 
